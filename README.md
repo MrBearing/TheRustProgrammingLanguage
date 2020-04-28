@@ -1,0 +1,2 @@
+# TheRustProgrammingLanguage
+プログラミング言語Rust公式ガイドの写経他メモなどの成果物をまとめます。
