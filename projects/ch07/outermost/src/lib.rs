@@ -1,18 +1,19 @@
-mod outermost {
+pub mod outermost {
     pub fn middle_function() {}
 
-    fn middle_secret_function() {}
+    pub fn middle_secret_function() {}
 
-    mod inside {
+    pub mod inside {
         pub fn inner_function() {}
 
-        fn secret_function() {}
+        pub fn secret_function() {}
     }
 }
 
-fn try_me() {
+pub fn try_me() {
     outermost::middle_function();
     outermost::middle_secret_function();  // pubではないのでエラー
+    crate::outermost::middle_secret_function();
     outermost::inside::inner_function();  // insudeモジュールがpubではないのでエラー
     outermost::inside::secret_function(); // insudeモジュールがpubではないのでエラー
 }
@@ -25,3 +26,13 @@ mod tests {
         assert_eq!(2 + 2, 4);
     }
 }
+
+
+
+// insideモジュールが公開だったらどうだろうか？
+// -> outermost::inside::secret_function()がエラーになる。この関数はpubではない
+// outermostが公開で、insideが非公開ならどうだろうか？
+// -> outermost::middle_secret_functionは通るけど
+// inner_functionの本体で::outermost::middle_secret_function()を呼び出したらどうだろうか？ 
+//  (頭の二つのコロンは、ルートモジュールから初めてモジュールを参照したいということを意味します)
+// 大本のoutermostが非公開なのでエラー
