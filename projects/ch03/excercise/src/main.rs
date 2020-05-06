@@ -3,7 +3,7 @@ use excercise::temp::Temprature;
 
 extern crate numeral;
 use numeral::Cardinal;
-
+use excercise::twelve_days;
 fn main() {
     println!("Hello, world! {} ", (1+2)*3);
     let c_0_degree = Temprature::from_celsius(0.0);
@@ -13,5 +13,16 @@ fn main() {
 
     let n = 127;
     println!("{} is written: {}", n, n.cardinal());
+    let st = "abcdefghij";
+    println!("{}",&st[..3]);
+
+    for i in 1..=12 {
+        let result = twelve_days::lyrics::get_lyrics(i);
+        match result {
+            Some(r) => print!("{}",r),
+            None => println!("fail"),
+        }
+        println!("");
+    }
 
 }
