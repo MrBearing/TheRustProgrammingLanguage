@@ -24,6 +24,14 @@ fn some_func(p: Parent){
     println!("(in function)  p1: {:?}", p1);
 }
 
+struct NewString(String);
+
+impl Drop for NewString{
+    fn drop(&mut self) {
+        println!("Dropping {:?}", self.0);
+    }
+}
+
 fn main() {
     let p1 = Parent(1, Child(11), Child(12));
 
