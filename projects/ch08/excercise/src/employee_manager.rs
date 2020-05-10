@@ -74,7 +74,6 @@ pub fn run(){
 mod tests {
     use super::*;
 
-
     #[test]
     fn test_command() {
         let mut employees = Employees::new();

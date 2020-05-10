@@ -1,0 +1,13 @@
+[package]
+name = "panic_error"
+version = "0.1.0"
+authors = ["Takumi Okamoto <takumi1988okamoto@gmail.com>"]
+edition = "2018"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+
+
+[profile.release]
+panic = 'abort'  # このように記述するとパニック後に異常終了することができる

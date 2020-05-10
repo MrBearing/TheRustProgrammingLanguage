@@ -2,7 +2,7 @@ pub mod outermost {
     pub fn middle_function() {
     }
 
-    pub fn middle_secret_function() {}
+    fn middle_secret_function() {}
 
     pub mod inside {
         pub fn inner_function() {}
@@ -16,10 +16,11 @@ pub mod outermost {
     }
 
     mod m2 {
-        // fn f2() {
-        //     crate::outermost::m1::f1();
-        //     super::m1::f1();
-        // }
+        fn f2() {
+            super::middle_secret_function();
+            // crate::outermost::m1::f1();
+            // super::m1::f1();
+        }
     }
 }
 
