@@ -18,6 +18,14 @@ impl Drop for Child {
     }
 }
 
+
+
+fn some_func_ref(p: &Parent){
+    let mut p1 = p.clone();//Parent(p.0+100 , Child(111), Child(112));
+    p1.0 = p1.0 + 100;
+    println!("(in function)  p1: {:?}", p1);
+}
+
 fn some_func(p: Parent){
     let mut p1 = p.clone();//Parent(p.0+100 , Child(111), Child(112));
     p1.0 = p1.0 + 100;
@@ -38,7 +46,11 @@ fn main() {
     {
         let p2 = Parent(2, Child(21), Child(22));
         println!("(a)  p1: {:?}, p2: {:?}", p1, p2);  // (a)の時点
+        some_func_ref(&p2);
+        println!("(a-1)  p1: {:?},p2: {:?}", p1, p2);  // (a)の時点
         some_func(p2);
+        println!("(a-2)  p1: {:?},p2:is deleted ", p1);  // (a)の時点
+
     }
 
     println!("(b)  p1: {:?}", &p1);                   // (b)の時点

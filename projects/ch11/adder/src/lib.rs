@@ -19,6 +19,7 @@ pub fn greeting(name: &str) -> String {
     format!("Hello {}!",name)
 }
 
+#[allow(unused_variables)]
 pub struct Guess {
     value: u32,
 }
