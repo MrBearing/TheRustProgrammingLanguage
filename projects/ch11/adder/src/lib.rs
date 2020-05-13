@@ -21,7 +21,7 @@ pub fn greeting(name: &str) -> String {
 
 #[allow(unused_variables)]
 pub struct Guess {
-    value: u32,
+    pub value: u32,
 }
 
 impl Guess { 
