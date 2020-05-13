@@ -87,8 +87,6 @@ Pick three.";
     #[test]
     fn case_insensitive() {
         let query = "rUsT";
-// (最後の行のみ)
-// 私を信じて
         let contents = "\
 Rust:
 safe, fast, productive.
