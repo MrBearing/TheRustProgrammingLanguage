@@ -5,10 +5,10 @@ use std::process;
 use minigrep::Config;
 
 fn main() {
-    let args: Vec<String> = env::args().collect(); 
-    // std::env::args_os //不正なユニコードを受け取る可能性がある場合
+    // std::env::args -> std::env::args_os 
+    //不正なユニコードを受け取る可能性がある場合はこっちを使う
 
-    let config = Config::new(&args).unwrap_or_else(|err| {
+    let config = Config::new(env::args()).unwrap_or_else(|err| {
         eprintln!("Problem parsing arguments: {}", err);
         process::exit(1);
     });
