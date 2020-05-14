@@ -1,7 +1,7 @@
-extern crate art;
+extern crate hackelnickel;
 
-use art::PrimaryColor;
-use art::mix;
+use hackelnickel::PrimaryColor;
+use hackelnickel::mix;
 
 fn main() {
     let red = PrimaryColor::Red;
