@@ -1,10 +1,10 @@
 
-struct Counter {
+pub struct Counter {
     count: u32,
 }
 
 impl Counter{
-    fn new() -> Counter {
+    pub fn new() -> Counter {
         Counter{count: 0}
     }
 }
