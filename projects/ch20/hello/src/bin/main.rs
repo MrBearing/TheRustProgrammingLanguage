@@ -10,8 +10,12 @@ use std::time::Duration;
 
 fn main() {
     let listener = TcpListener::bind("127.0.0.1:7878").unwrap();
-    let pool = ThreadPool::new(4);
-
+    let result = ThreadPool::new(4);
+    let pool = match result {
+        Ok(tp) => tp,
+        Err(e) => panic!(e),
+    };
+    
     let mut counter = 0;
     for stream in listener.incoming() {
         let stream = stream.unwrap();
