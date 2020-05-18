@@ -11,6 +11,7 @@ fn do_twice(f: fn(i32) -> i32, arg: i32) -> i32 {
 //     |x| x + 1
 // }
 
+// static参照にする
 pub fn returns_closure_static() -> &'static dyn Fn(i32) -> i32 {
     &|x| x + 1
 }
