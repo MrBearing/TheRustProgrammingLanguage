@@ -39,9 +39,11 @@ fn main() {
         println!("{} is at index {}", value, index);
     }
 
-    if let x = 5 {
-        println!("{}",x);
-    }
+
+    // エラーにならないよ。。。。warning のみ
+    // if let x = 5 {
+    //     println!("{}",x);
+    // }
 
     let (_x, _y, _z) = (1, 2, 3);
     let some_option_value = Some("test string");
