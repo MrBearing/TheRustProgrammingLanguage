@@ -34,21 +34,53 @@ fn pi_loop(d: i32) -> f64{
     let mut a = 1.0;
     let mut b = 1.0/2.0_f64.sqrt();
     let mut t = 1.0/4.0;
-    let mut pn = 1.0;
+    let mut p = 1.0;
     
     for _ in 1..=d {
         let an = (a + b) / 2.0;
         b = (a*b).sqrt();
-        t -= (an -a).powi(2) * pn;
-        pn *= 2.0;
+        t -= (an -a).powi(2) * p;
+        p *= 2.0;
         a = an;
     }
     (a + b).powi(2) / (4.0 * t)
 }
 
+struct Pi{
+    a: f64,
+    b: f64,
+    t: f64,
+    p: f64,
+}
+
+impl Pi {
+    fn new() -> Pi {
+        Pi{
+             a: 1.0,
+             b: 1.0/2.0_f64.sqrt(),
+             t: 1.0/4.0,
+             p: 1.0,
+        }
+    }
+
+    fn get(&self) -> f64{
+        (self.a + self.b).powi(2) / (4.0 * self.t)
+    }
+}
+
 fn pi_iter(d: i32) -> f64{
-    
-    0.0
+    (1..=d).fold(Pi::new(), move | acc, _| {
+        let an = (acc.a + acc.b) / 2.0;
+        let b = (acc.a*acc.b).sqrt();
+        let t = acc.t - (an -acc.a).powi(2) * acc.p;
+        let p = 2.0*acc.p;
+        Pi {
+            a: an,
+            b,
+            t,
+            p,
+        }
+    }).get()
 }
 
 
@@ -56,6 +88,7 @@ fn main() {
     
     println!("loop      : {}",pi_loop(23));
     println!("recursion : {}",pi_recursion(23));
+    println!("iter : {}",pi_iter(23));
 
 }
 
