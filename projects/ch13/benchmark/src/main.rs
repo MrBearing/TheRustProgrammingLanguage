@@ -71,7 +71,7 @@ mod tests {
         diff <= 10.0_f64.powf(-digit as f64)
     } 
     
-
+ 
     #[test]
     fn test_pi_recursion() {
         print!("0 ,");
