@@ -1,3 +1,24 @@
+use std::time::Instant;
+
+/// 実行時間計測マクロ
+/// 
+/// 参考にした
+/// [Qiita記事](https://qiita.com/pseudo_foxkeh/items/5d5226e3ffa27631e80d)
+/// 
+macro_rules! measure {
+  ( $x:expr ) => {
+    {
+      let start = Instant::now();
+      let result = $x; //実行される関数や式
+      let end = start.elapsed();
+      println!("time: {:02}.{:09} , result :{:.6}",
+        end.as_secs(), end.subsec_nanos(), result);
+      result
+    }
+  };
+}
+
+
 fn a(n: i32) -> f64 {
     match n {
         0 => 1.0,
@@ -71,25 +92,36 @@ impl Pi {
 fn pi_iter(d: i32) -> f64{
     (1..=d).fold(Pi::new(), move | acc, _| {
         let an = (acc.a + acc.b) / 2.0;
-        let b = (acc.a*acc.b).sqrt();
-        let t = acc.t - (an -acc.a).powi(2) * acc.p;
-        let p = 2.0*acc.p;
         Pi {
             a: an,
-            b,
-            t,
-            p,
+            b: (acc.a*acc.b).sqrt(),
+            t: acc.t - (an -acc.a).powi(2) * acc.p,
+            p: 2.0*acc.p,
         }
     }).get()
 }
 
+/// 計算結果
+/// loop :: time: 00.000002055 
+/// iter :: time: 00.000002295 
+/// rec  :: time: 00.661693180
+/// 
+/// 所感・考察:イテレータのほうが若干遅い。 
+/// 1000回目までの計算時間はだいたい10micro程度の差が出た。
+/// 構造体を定義してしまったのが意外と効いてしまってる？
+/// 
+/// イテレータの実装はfold()を見つけるまでに苦労した。
+/// 
+/// 再帰はシャレで実装したけど計算結果のメモ化がされてないため、
+/// 実行時間がかなりかかってる印象　aとbだけでもメモ化すればかなり変わるかな。
 
 fn main() {
-    
-    println!("loop      : {}",pi_loop(23));
-    println!("recursion : {}",pi_recursion(23));
-    println!("iter : {}",pi_iter(23));
-
+    print!("loop :: ");
+    measure!(pi_loop(23));
+    print!("iter :: ");
+    measure!(pi_iter(23));
+    print!("rec  :: ");
+    measure!(pi_recursion(23)); // bの計算値がメモ化されていないため、遅い
 }
 
 
