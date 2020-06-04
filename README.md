@@ -1,5 +1,6 @@
 # TheRustProgrammingLanguage
-(2020/5/30 通読完了)
+2020/5/30 通読およびサンプル写経完了
+
 プログラミング言語Rust公式ガイドの写経他メモなどの成果物をまとめます。
 
 - [日本語ドキュメント](https://doc.rust-jp.rs/book/second-edition/)
